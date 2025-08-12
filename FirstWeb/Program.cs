@@ -46,8 +46,12 @@ namespace FirstWeb
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
-            //Seeding Data
-            var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
+			app.MapControllerRoute(
+			   name: "Areas",
+			   pattern: "{area:exists}/{controller=Product}/{action=Index}/{id?}");
+
+			//Seeding Data
+			var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<DataContext>();
             SeedData.SeedingDataa(context);
 
             app.Run();
