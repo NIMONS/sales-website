@@ -1,5 +1,6 @@
 ﻿using FirstWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstWeb.Areas.Admin.Controllers
 {
@@ -12,9 +13,18 @@ namespace FirstWeb.Areas.Admin.Controllers
 		{
 			this._dataContext = dataContext;
 		}
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			return View();
+			var produtcs = await this._dataContext.Products
+				.OrderByDescending(p => p.Id)
+				.Include("Category")
+				.Include("Brand")
+				.ToListAsync();
+
+			return View(produtcs);
+
 		}
+
+
 	}
 }
