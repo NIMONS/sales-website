@@ -40,6 +40,8 @@ namespace FirstWeb.Controllers
 
 			HttpContext.Session.SetJson("Cart", cart);
 
+			TempData["success"] = "Add item to cart successfully";
+
 			return Redirect(Request.Headers["Referer"].ToString());
 		}
 
@@ -68,7 +70,9 @@ namespace FirstWeb.Controllers
 				HttpContext.Session.SetJson("Cart", cart);
 			}
 
-				return RedirectToAction("Index");
+			TempData["success"] = "Decrease item quantity to cart successfully";
+
+			return RedirectToAction("Index");
 		}
 
 		public async Task<IActionResult> Increase(int id)
@@ -95,6 +99,8 @@ namespace FirstWeb.Controllers
 				HttpContext.Session.SetJson("Cart", cart);
 			}
 
+			TempData["success"] = "Increase item quantity to cart successfully";
+
 			return RedirectToAction("Index");
 		}
 
@@ -113,6 +119,8 @@ namespace FirstWeb.Controllers
 				HttpContext.Session.SetJson("Cart", cart);
 			}
 
+			TempData["success"] = "Remove item to cart successfully";
+
 			return RedirectToAction("Index");
 		}
 
@@ -120,6 +128,7 @@ namespace FirstWeb.Controllers
 		{
 			HttpContext.Session.Remove("Cart");
 
+			TempData["success"] = "You're clead your cart successfully";
 			return RedirectToAction("Index");
 
 		}
