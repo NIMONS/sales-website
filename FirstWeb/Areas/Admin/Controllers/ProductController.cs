@@ -1,5 +1,6 @@
 ﻿using FirstWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace FirstWeb.Areas.Admin.Controllers
@@ -22,7 +23,13 @@ namespace FirstWeb.Areas.Admin.Controllers
 				.ToListAsync();
 
 			return View(produtcs);
+		}
 
+		public IActionResult Create()
+		{
+			ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name");
+			ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name");
+			return View();
 		}
 
 
