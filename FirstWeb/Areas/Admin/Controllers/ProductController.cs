@@ -1,4 +1,5 @@
-﻿using FirstWeb.Repository;
+﻿using FirstWeb.Models;
+using FirstWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace FirstWeb.Areas.Admin.Controllers
 			return View(produtcs);
 		}
 
+		[HttpGet]
 		public IActionResult Create()
 		{
 			ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name");
@@ -32,6 +34,12 @@ namespace FirstWeb.Areas.Admin.Controllers
 			return View();
 		}
 
+		public async Task<IActionResult> Create(ProductModel product)
+		{
+			ViewBag.Categories = new SelectList(_dataContext.Categories, "Id", "Name", product.CategoryID);
+			ViewBag.Brands = new SelectList(_dataContext.Brands, "Id", "Name", product.BrandId);
 
+			return View(product);
+		}
 	}
 }
