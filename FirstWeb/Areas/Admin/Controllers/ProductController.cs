@@ -103,7 +103,6 @@ namespace FirstWeb.Areas.Admin.Controllers
 				TempData["error"] = "sản phẩm không tồn tại";
 				return NotFound();
 			}
-
 			
 			string uploadDir = Path.Combine(_webHostEnvironment.WebRootPath, "media/products");
 			string oldfileImage = Path.Combine(uploadDir, productModel.Image);
@@ -119,8 +118,6 @@ namespace FirstWeb.Areas.Admin.Controllers
 				ModelState.AddModelError("", "Lỗi khi cố gắng xóa ảnh");
 			}
 
-			
-
 			this._dataContext.Products.Remove(productModel);
 			await this._dataContext.SaveChangesAsync();
 			
@@ -128,7 +125,7 @@ namespace FirstWeb.Areas.Admin.Controllers
 			return RedirectToAction("Index");
 		}
 
-		[Route("Edit")]
+		[Route("Product/Edit/{id?}")]
 		public async Task<IActionResult> Edit(int Id)
 		{
 			ProductModel productModel = await this._dataContext.Products.FindAsync(Id);
@@ -145,7 +142,7 @@ namespace FirstWeb.Areas.Admin.Controllers
 			return View(productModel);
 		}
 
-		[Route("Edit")]
+		[Route("Product/Edit/{id?}")]
 		[HttpPost]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(ProductModel product)
