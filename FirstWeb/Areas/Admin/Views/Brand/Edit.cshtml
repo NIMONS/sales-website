@@ -1,9 +1,9 @@
-﻿@model CategoryModel
+﻿@model BrandModel
 @{
-	ViewData["title"] = "Edit Category";
+	ViewData["title"] = "Edit Brand";
 }
 
-<h4>Edit Category</h4>
+<h4>Edit Brand</h4>
 <div class="col-md-9">
 	<form asp-action="Edit" enctype="multipart/form-data">
 		<input type="hidden" asp-for="Id" />
@@ -33,7 +33,7 @@
 			<button class="btn btn-primary">Update</button>
 		</div>
 	</form>
-	<a asp-action="Index">Back to List Category</a>
+	<a asp-action="Index">Back to List Brand</a>
 </div>
 @section Scripts {
 	@{

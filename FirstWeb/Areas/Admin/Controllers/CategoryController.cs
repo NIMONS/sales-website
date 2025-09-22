@@ -89,7 +89,7 @@ namespace FirstWeb.Areas.Admin.Controllers
 			this._dataContext.Categories.Remove(categoryModel);
 			await this._dataContext.SaveChangesAsync();
 
-			TempData["success"] = "Danh mục phẩm thành công";
+			TempData["success"] = "Xóa danh mục thành công";
 			return RedirectToAction("Index");
 		}
 
