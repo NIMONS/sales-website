@@ -1,5 +1,6 @@
 ﻿using FirstWeb.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FirstWeb.Controllers
 {
@@ -19,9 +20,9 @@ namespace FirstWeb.Controllers
 
 		public async Task<IActionResult > Details(int id)
 		{
-			if(id == null) return RedirectToAction("Index");
+			if(id == 0) return RedirectToAction("Index");
 
-			var productById = this._dataContext.Products.Where(c => c.Id == id).FirstOrDefault();
+			var productById = await this._dataContext.Products.Where(c => c.Id == id).FirstOrDefaultAsync();
 
 
 			return View(productById);
